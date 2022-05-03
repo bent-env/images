@@ -1,0 +1,20 @@
+{
+  "name": "@bent-env/images",
+  "private": true,
+  "version": "1.0.0",
+  "description": "bent.env container images",
+  "scripts": {
+    "docker:build": "cd $image && docker build . --rm --tag bent:$image",
+    "debian": "image=debian npm run docker:build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bent-env/images.git"
+  },
+  "author": "Sepehr Laal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bent-env/images/issues"
+  },
+  "homepage": "https://github.com/bent-env/images#readme"
+}
