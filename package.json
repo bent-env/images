@@ -8,7 +8,8 @@
     "debian": "image=debian npm run docker:build",
     "generic": "image=generic npm run docker:build",
     "podman": "image=podman npm run docker:build",
-    "nodejs": "image=nodejs npm run docker:build"
+    "nodejs": "image=nodejs npm run docker:build",
+    "python": "image=python npm run docker:build"
   },
   "repository": {
     "type": "git",
