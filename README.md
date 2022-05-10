@@ -31,3 +31,7 @@ a collection of images to be used as OS images in [v86](https://github.com/copy/
 ### terraform
 
 ![terraform](terraform/demo.png "Terraform in browser")
+
+### gstreamer
+
+![gstreamer](gstreamer/demo.png "GStreamer executed in browser")
