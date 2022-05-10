@@ -1,7 +1,6 @@
 FROM i386/debian:bullseye
 
 ENV HOME /root
-ENV PODMAN_ARGS "--storage-driver=vfs --cgroup-manager=cgroupfs --events-backend=none"
 ENV DEBIAN_FRONTEND noninteractive
 
 COPY data/boot-9p /etc/initramfs-tools/scripts/boot-9p
@@ -11,17 +10,14 @@ COPY data/ne2k /ne2k
 RUN apt-get update && \
   apt-get upgrade -y && \
   apt-get --yes --no-install-recommends --no-install-suggests install \
-    linux-image-686 systemd initramfs-tools nano \
-    ca-certificates podman crun net-tools dhcpcd5 \
+    linux-image-686 systemd initramfs-tools \
+    ca-certificates net-tools dhcpcd5 \
     # packages needed to build 32 bit binaries and kernel modules, will be removed later
     build-essential make cmake linux-headers-686-pae \
   && \
   chmod +x ~/networking.sh && \
   # build the ne2k network driver
   cd /ne2k && make && make install && cd ~ && rm -rf /ne2k && \
-  # 32 bit podman sanity pull and setup
-  echo "alias docker='podman $PODMAN_ARGS'" >> ~/.bashrc && \
-  bash -c "podman $PODMAN_ARGS pull docker.io/hello-world" && \
   # change shell to bash and change root password
   chsh -s /bin/bash && \
   echo "root:root" | chpasswd && \
@@ -30,6 +26,8 @@ RUN apt-get update && \
   systemctl enable serial-getty@ttyS0.service && \
   # disable "normal" services that aren't needed
   rm /lib/systemd/system/getty.target.wants/getty-static.service && \
+  systemctl disable systemd-journal-flush.service && \
+  systemctl disable systemd-journald.service && \
   systemctl disable systemd-timesyncd.service && \
   systemctl disable apt-daily.timer && \
   systemctl disable apt-daily-upgrade.timer && \
