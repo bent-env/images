@@ -5,7 +5,8 @@
   "description": "bent.env container images",
   "scripts": {
     "docker:build": "cd $image && docker build . --rm --tag bent:$image",
-    "debian": "image=debian npm run docker:build"
+    "debian": "image=debian npm run docker:build",
+    "generic": "image=generic npm run docker:build"
   },
   "repository": {
     "type": "git",
