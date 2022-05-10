@@ -2,11 +2,12 @@
   "name": "@bent-env/images",
   "private": true,
   "version": "1.0.0",
-  "description": "bent.env container images",
+  "description": "bentenv.com container images",
   "scripts": {
     "docker:build": "cd $image && docker build . --rm --tag bent:$image",
     "debian": "image=debian npm run docker:build",
-    "generic": "image=generic npm run docker:build"
+    "generic": "image=generic npm run docker:build",
+    "podman": "image=podman npm run docker:build"
   },
   "repository": {
     "type": "git",
