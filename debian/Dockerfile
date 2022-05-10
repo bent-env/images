@@ -5,13 +5,20 @@ ENV PODMAN_ARGS "--storage-driver=vfs --cgroup-manager=cgroupfs --events-backend
 ENV DEBIAN_FRONTEND noninteractive
 
 COPY data/boot-9p /etc/initramfs-tools/scripts/boot-9p
+COPY data/networking.sh $HOME
+COPY data/ne2k /ne2k
 
 RUN apt-get update && \
   apt-get upgrade -y && \
-  apt-get --yes --no-install-recommends install \
-    linux-image-686 grub2 systemd initramfs-tools \
-    ca-certificates nano podman crun \
+  apt-get --yes --no-install-recommends --no-install-suggests install \
+    linux-image-686 systemd initramfs-tools nano \
+    ca-certificates podman crun net-tools dhcpcd5 \
+    # packages needed to build 32 bit binaries and kernel modules, will be removed later
+    build-essential make cmake linux-headers-686-pae \
   && \
+  chmod +x ~/networking.sh && \
+  # build the ne2k network driver
+  cd /ne2k && make && make install && cd ~ && rm -rf /ne2k && \
   # 32 bit podman sanity pull and setup
   echo "alias docker='podman $PODMAN_ARGS'" >> ~/.bashrc && \
   bash -c "podman $PODMAN_ARGS pull docker.io/hello-world" && \
@@ -26,7 +33,6 @@ RUN apt-get update && \
   systemctl disable systemd-timesyncd.service && \
   systemctl disable apt-daily.timer && \
   systemctl disable apt-daily-upgrade.timer && \
-  systemctl disable dhcpcd.service && \
   # make sure fstab is configured with tmpfs
   echo "tmpfs /tmp tmpfs nodev,nosuid 0 0" >> /etc/fstab && \
   # boot with 9pfs (comment out to boot from hdd)
@@ -34,12 +40,13 @@ RUN apt-get update && \
   echo 'BOOT=boot-9p' | tee -a /etc/initramfs-tools/initramfs.conf && \
   update-initramfs -u && \
   # clean up as much as possible to reduce image space
-  apt-get autoremove -y && \
+  apt-get remove --yes --purge build-essential make cmake linux-headers-686-pae && \
+  apt-get --yes autoremove --purge && \
+  apt-get --yes autoclean && \
   apt-get --yes clean && \
   rm -r /var/lib/apt/lists/* && \
   rm -r /usr/share/doc/* && \
   rm -r /usr/share/man/* && \
-  rm -r /usr/share/locale/?? && \
   rm /var/log/*.log /var/log/lastlog /var/log/wtmp /var/log/apt/*.log /var/log/apt/*.xz && \
   # get bent.
   echo "done :)"
