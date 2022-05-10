@@ -10,7 +10,8 @@
     "podman": "image=podman npm run docker:build",
     "nodejs": "image=nodejs npm run docker:build",
     "python": "image=python npm run docker:build",
-    "golang": "image=golang npm run docker:build"
+    "golang": "image=golang npm run docker:build",
+    "terraform": "image=terraform npm run docker:build"
   },
   "repository": {
     "type": "git",
