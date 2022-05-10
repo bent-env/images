@@ -1,4 +1,4 @@
-FROM i386/debian:bullseye
+FROM --platform=linux/386 i386/debian:bullseye
 
 ENV HOME /root
 ENV DEBIAN_FRONTEND noninteractive
