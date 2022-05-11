@@ -8,9 +8,9 @@ const assert = require("assert");
 
 const IMAGE = process.argv[2] || 'debian';
 const ROOT = path.resolve(__dirname, '..');
-const V86_ROOT = process.argv[3];
-assert.ok(fs.existsSync(V86_ROOT), `make sure to run "make all" and build v86 before this`)
+const V86_ROOT = path.resolve(__dirname, 'vendor/v86');;
 const V86_LIB = path.join(V86_ROOT, "build/libv86.js");
+assert.ok(fs.existsSync(V86_LIB), `make sure to run "make all" and build v86 before this`)
 
 const { V86 } = require(V86_LIB);
 const OUTPUT_FILE = path.join(ROOT, `dist/${IMAGE}/${IMAGE}-state-base.bin`);

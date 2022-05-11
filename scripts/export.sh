@@ -16,7 +16,7 @@ mkdir -p $ROOT
 docker rm "$CONTAINER_NAME" || true
 docker create --rm -it --name "$CONTAINER_NAME" "$IMAGE_NAME" bash
 docker export "$CONTAINER_NAME" > "$OUT_ROOTFS_TAR"
-$BASE/scripts/fs2json.py --out "$OUT_FSJSON" "$OUT_ROOTFS_TAR"
+$BASE/scripts/vendor/v86/tools/fs2json.py --out "$OUT_FSJSON" "$OUT_ROOTFS_TAR"
 mkdir -p "$OUT_ROOTFS_FLAT"
-$BASE/scripts/copy-to-sha256.py "$OUT_ROOTFS_TAR" "$OUT_ROOTFS_FLAT"
+$BASE/scripts/vendor/v86/tools/copy-to-sha256.py "$OUT_ROOTFS_TAR" "$OUT_ROOTFS_FLAT"
 echo "$OUT_ROOTFS_TAR", "$OUT_ROOTFS_FLAT" and "$OUT_FSJSON" created.

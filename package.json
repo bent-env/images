@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "bentenv.com container images",
   "scripts": {
+    "postinstall": "git submodule update --init --recursive && cd scripts/vendor/v86 && make all",
     "docker:build": "cd $image && docker build . --rm --tag bent:$image",
     "docker:export": "cd scripts && ./export.sh $image",
     "v86:boot": "cd scripts && ./boot.js $image $v86",
@@ -33,7 +34,8 @@
     "v86:boot:gstreamer": "image=gstreamer npm run v86:boot",
     "build": "npm-run-all docker:build:*",
     "export": "npm-run-all docker:export:*",
-    "boot": "npm-run-all v86:boot:*"
+    "boot": "npm-run-all v86:boot:*",
+    "demo": "http-serve --cors ."
   },
   "repository": {
     "type": "git",
@@ -46,6 +48,7 @@
   },
   "homepage": "https://github.com/bent-env/images#readme",
   "dependencies": {
+    "http-serve": "^1.0.1",
     "npm-run-all": "^4.1.5"
   }
 }
