@@ -1,0 +1,3 @@
+[submodule "scripts/vendor/v86"]
+	path = scripts/vendor/v86
+	url = https://github.com/copy/v86.git
