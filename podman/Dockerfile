@@ -9,3 +9,5 @@ RUN apt-get update && \
   echo "alias docker='podman $PODMAN_ARGS'" >> ~/.bashrc && \
   bash -c "podman $PODMAN_ARGS pull docker.io/hello-world" && \
   rm -rf /var/lib/apt/lists/*
+
+COPY data/containers /usr/share/containers

@@ -52,4 +52,3 @@ RUN apt-get update && \
 COPY data/getty-noclear.conf data/getty-override.conf /etc/systemd/system/getty@tty1.service.d/
 COPY data/getty-autologin-serial.conf /etc/systemd/system/serial-getty@ttyS0.service.d/
 COPY data/logind.conf /etc/systemd/logind.conf
-COPY data/containers /usr/share/containers
