@@ -5,14 +5,15 @@
   "description": "bentenv.com container images",
   "scripts": {
     "docker:build": "cd $image && docker build . --rm --tag bent:$image",
-    "debian": "image=debian npm run docker:build",
-    "generic": "image=generic npm run docker:build",
-    "podman": "image=podman npm run docker:build",
-    "nodejs": "image=nodejs npm run docker:build",
-    "python": "image=python npm run docker:build",
-    "golang": "image=golang npm run docker:build",
-    "terraform": "image=terraform npm run docker:build",
-    "gstreamer": "image=gstreamer npm run docker:build"
+    "docker:build:debian": "image=debian npm run docker:build",
+    "docker:build:generic": "image=generic npm run docker:build",
+    "docker:build:podman": "image=podman npm run docker:build",
+    "docker:build:nodejs": "image=nodejs npm run docker:build",
+    "docker:build:python": "image=python npm run docker:build",
+    "docker:build:golang": "image=golang npm run docker:build",
+    "docker:build:terraform": "image=terraform npm run docker:build",
+    "docker:build:gstreamer": "image=gstreamer npm run docker:build",
+    "build": "npm-run-all docker:build:*"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/bent-env/images/issues"
   },
-  "homepage": "https://github.com/bent-env/images#readme"
+  "homepage": "https://github.com/bent-env/images#readme",
+  "dependencies": {
+    "npm-run-all": "^4.1.5"
+  }
 }

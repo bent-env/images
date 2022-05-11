@@ -1,6 +1,20 @@
 # bent container images
 
-a collection of images to be used as OS images in [v86](https://github.com/copy/v86/) and booted entirely in browser.
+a collection of images to be used as OS disks in [v86](https://github.com/copy/v86/) and booted entirely in browser.
+
+currently image sizes are:
+
+```bash
+$ docker images --format "{{.Tag}}: {{.Size}}" --filter=reference='bent*'
+debian: 361MB
+generic: 702MB
+golang: 669MB
+nodejs: 460MB
+podman: 467MB
+python: 401MB
+terraform: 424MB
+gstreamer: 504MB
+```
 
 ## gallery
 
