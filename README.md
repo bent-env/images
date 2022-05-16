@@ -49,3 +49,24 @@ gstreamer: 504MB
 ### gstreamer
 
 ![gstreamer](gstreamer/demo.png "GStreamer executed in browser")
+
+## build images
+
+you need Docker installed globally for these to work.
+
+```bash
+npm run debian
+npm run generic
+npm run podman
+npm run nodejs
+npm run python
+npm run golang
+npm run terraform
+npm run gstreamer
+```
+
+## run images
+
+```bash
+npm run demo
+```
