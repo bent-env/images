@@ -12,7 +12,7 @@ golang: 669MB
 nodejs: 460MB
 podman: 467MB
 python: 401MB
-terraform: 424MB
+terraform: 630MB
 gstreamer: 504MB
 ```
 
@@ -44,7 +44,7 @@ gstreamer: 504MB
 
 ### terraform
 
-![terraform](terraform/demo.png "Terraform in browser")
+![terraform](terraform/demo.png "Terraform in browser + AWS provider")
 
 ### gstreamer
 
